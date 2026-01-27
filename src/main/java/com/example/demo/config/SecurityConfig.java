@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.service.MaintenanceService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,20 +25,23 @@ public class SecurityConfig {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, MaintenanceService ms) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth-> auth.requestMatchers("auth/**").permitAll()
+                .authorizeHttpRequests(auth-> auth
+                        .requestMatchers("auth/**").permitAll()
                         // Role-based by path + method
 //                        .requestMatchers(HttpMethod.GET, "/api/v1/reports/**").hasRole("ADMIN")
-                        .requestMatchers("api/v1/**").hasRole("ADMIN")
+                        .requestMatchers("api/v1/admin/**", "api/v1/maintenance/**").hasRole("ADMIN")
+
                         // Default
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(new MaintenanceModeFilter(ms), JwtAuthFilter.class);
         return http.build();
     }
 

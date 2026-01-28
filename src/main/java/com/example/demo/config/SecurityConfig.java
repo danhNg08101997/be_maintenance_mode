@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sm->sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth-> auth
-                        .requestMatchers("auth/**").permitAll()
+                        .requestMatchers("auth/**","swagger-ui.html", "swagger-ui/**", "v3/api-docs/**").permitAll()
                         // Role-based by path + method
 //                        .requestMatchers(HttpMethod.GET, "/api/v1/reports/**").hasRole("ADMIN")
                         .requestMatchers("api/v1/admin/**", "api/v1/maintenance/**").hasRole("ADMIN")

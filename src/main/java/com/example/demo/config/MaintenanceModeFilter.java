@@ -54,7 +54,7 @@ public class MaintenanceModeFilter extends OncePerRequestFilter {
         response.setStatus(503);
         response.setContentType("application/json");
         response.getWriter().write("""
-                {"code", "MAINTENANCE_MODE", "message": "Hệ thống đang bảo trì. Vui lòng quay lại sau."}
+                {"code": "MAINTENANCE_MODE", "message": "Hệ thống đang bảo trì. Vui lòng quay lại sau."}
                 """);
     }
 }

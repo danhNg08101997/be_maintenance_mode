@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.service.MaintenanceService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Maintenance", description = "Test Maintenance")
 @RestController
 @RequestMapping("/api/v1/admin/maintenance")
 public class MaintenanceAdminController {

@@ -1,5 +1,7 @@
 package com.example.demo.config;
 
+import com.example.demo.config.filter.JwtAuthFilter;
+import com.example.demo.config.filter.MaintenanceModeFilter;
 import com.example.demo.service.MaintenanceService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

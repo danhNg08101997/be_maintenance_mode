@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.filter;
 
 import com.example.demo.service.JwtService;
 import jakarta.servlet.FilterChain;

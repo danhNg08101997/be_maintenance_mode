@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.filter;
 
 import com.example.demo.service.MaintenanceService;
 import jakarta.servlet.FilterChain;
